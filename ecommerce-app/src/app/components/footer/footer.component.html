@@ -1,0 +1,46 @@
+<footer class="footer">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <span class="brand-name">Purple<em>Cart</em></span>
+      <p>Thoughtfully designed products, delivered with care. Shop smarter, live brighter.</p>
+      <div class="socials">
+        <a href="#" aria-label="Instagram">IG</a>
+        <a href="#" aria-label="Twitter">X</a>
+        <a href="#" aria-label="Pinterest">P</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <a routerLink="/shop">All Products</a>
+      <a routerLink="/shop">New Arrivals</a>
+      <a routerLink="/shop">Best Sellers</a>
+      <a routerLink="/shop">Sale</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Support</h4>
+      <a href="#">Shipping Info</a>
+      <a href="#">Returns</a>
+      <a href="#">Track Order</a>
+      <a href="#">Contact Us</a>
+    </div>
+
+    <div class="footer-col newsletter">
+      <h4>Stay in the loop</h4>
+      <p>Get 10% off your first order plus new drop alerts.</p>
+      <form class="newsletter-form" (submit)="$event.preventDefault()">
+        <input type="email" placeholder="Enter your email" />
+        <button class="btn btn-primary btn-sm" type="submit">Join</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© {{ year }} PurpleCart. All rights reserved.</p>
+    <div class="legal-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>

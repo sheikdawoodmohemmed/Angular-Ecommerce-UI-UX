@@ -1,0 +1,89 @@
+<app-hero></app-hero>
+
+<section class="section" id="categories">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Shop by Category</span>
+        <h2>Find exactly what you need</h2>
+      </div>
+      <a routerLink="/shop" class="btn btn-ghost btn-sm">View All →</a>
+    </div>
+    <div class="category-grid">
+      @for (c of categories; track c.name) {
+        <a routerLink="/shop" class="category-tile">
+          <span class="cat-emoji">{{ c.emoji }}</span>
+          <span class="cat-name">{{ c.name }}</span>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Handpicked</span>
+        <h2>Featured products</h2>
+      </div>
+      <a routerLink="/shop" class="btn btn-ghost btn-sm">Browse Shop →</a>
+    </div>
+    <div class="product-grid">
+      @for (p of featured; track p.id) {
+        <app-product-card [product]="p" (addToCart)="onAdd($event)"></app-product-card>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="promo-banner">
+      <div>
+        <span class="eyebrow" style="color:#fff">Limited Time</span>
+        <h2 style="color:#fff">End of Season Sale — up to 40% off</h2>
+        <p style="color:rgba(255,255,255,0.85)">Refresh your wardrobe and tech before the new drop lands.</p>
+        <a routerLink="/shop" class="btn" style="background:#fff;color:var(--purple-700);margin-top:16px;display:inline-flex">Shop the Sale</a>
+      </div>
+      <span class="promo-emoji">🎁</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Testimonials</span>
+        <h2>Loved by thousands of shoppers</h2>
+      </div>
+    </div>
+    <div class="testimonial-grid">
+      @for (t of testimonials; track t.name) {
+        <div class="card testimonial-card">
+          <div class="stars">
+            @for (s of [1,2,3,4,5]; track s) {
+              <span [class.filled]="s <= t.rating">★</span>
+            }
+          </div>
+          <p>"{{ t.text }}"</p>
+          <strong>{{ t.name }}</strong>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="newsletter-cta">
+      <h2>Get 10% off your first order</h2>
+      <p>Join our list for early access to drops, sales, and styling tips.</p>
+      <form class="newsletter-cta-form" (submit)="$event.preventDefault()">
+        <input type="email" placeholder="you@example.com" />
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </div>
+</section>

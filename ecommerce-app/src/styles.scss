@@ -1,0 +1,183 @@
+@use 'sass:color';
+
+:root {
+  --purple-50: #faf5ff;
+  --purple-100: #f3e8ff;
+  --purple-200: #e9d5ff;
+  --purple-300: #d8b4fe;
+  --purple-400: #c084fc;
+  --purple-500: #a855f7;
+  --purple-600: #9333ea;
+  --purple-700: #7e22ce;
+  --purple-800: #6b21a8;
+  --purple-900: #581c87;
+
+  --accent-pink: #ec4899;
+  --accent-gold: #fbbf24;
+
+  --ink-900: #1e1b2e;
+  --ink-700: #4a4458;
+  --ink-500: #837a93;
+  --ink-200: #e7e2ee;
+  --ink-100: #f5f2fa;
+
+  --surface: #ffffff;
+  --bg: #faf8fd;
+
+  --shadow-sm: 0 2px 8px rgba(88, 28, 135, 0.08);
+  --shadow-md: 0 8px 24px rgba(88, 28, 135, 0.12);
+  --shadow-lg: 0 20px 48px rgba(88, 28, 135, 0.18);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --gradient-primary: linear-gradient(135deg, var(--purple-600) 0%, var(--purple-800) 55%, var(--accent-pink) 120%);
+  --gradient-soft: linear-gradient(135deg, var(--purple-50) 0%, var(--purple-100) 100%);
+
+  --font-display: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink-900);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+p { line-height: 1.6; color: var(--ink-700); margin: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+button { font-family: inherit; cursor: pointer; }
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+}
+.btn-primary:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--purple-300);
+  color: var(--purple-700);
+}
+.btn-outline:hover { background: var(--purple-50); border-color: var(--purple-600); }
+
+.btn-ghost {
+  background: var(--ink-100);
+  color: var(--ink-900);
+}
+.btn-ghost:hover { background: var(--ink-200); }
+
+.btn-sm { padding: 8px 18px; font-size: 0.85rem; }
+.btn-block { width: 100%; }
+
+/* Badge */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.badge-sale { background: #ffe4ef; color: var(--accent-pink); }
+.badge-new { background: var(--purple-100); color: var(--purple-700); }
+
+/* Card */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+/* Section helpers */
+.section { padding: 72px 0; }
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.eyebrow {
+  color: var(--purple-600);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Form elements */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.field label { font-size: 0.85rem; font-weight: 600; color: var(--ink-700); }
+.field input, .field select, .field textarea {
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--ink-200);
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: var(--surface);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--purple-500);
+  box-shadow: 0 0 0 4px var(--purple-100);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--ink-100); }
+::-webkit-scrollbar-thumb { background: var(--purple-300); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--purple-500); }
+
+@media (max-width: 768px) {
+  .section { padding: 48px 0; }
+}

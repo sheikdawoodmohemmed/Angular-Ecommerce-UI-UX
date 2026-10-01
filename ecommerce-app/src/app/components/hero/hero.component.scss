@@ -1,0 +1,102 @@
+.hero {
+  background: var(--gradient-soft);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 48px;
+  padding: 72px 24px 80px;
+  position: relative;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  h1 {
+    font-size: clamp(2.3rem, 4vw, 3.4rem);
+    line-height: 1.08;
+    margin: 12px 0 20px;
+    color: var(--ink-900);
+  }
+  p { max-width: 460px; font-size: 1.02rem; margin-bottom: 28px; }
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 36px;
+  div { display: flex; flex-direction: column; }
+  strong { font-family: var(--font-display); font-size: 1.3rem; color: var(--purple-700); }
+  span { font-size: 0.8rem; color: var(--ink-500); }
+}
+
+.hero-visual {
+  position: relative;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10px);
+  opacity: 0.5;
+}
+.blob-1 { width: 280px; height: 280px; background: var(--purple-300); top: 10%; right: 10%; }
+.blob-2 { width: 200px; height: 200px; background: var(--accent-pink); bottom: 5%; left: 5%; opacity: 0.3; }
+
+.hero-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 2;
+}
+
+.hero-card-main {
+  width: 280px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: var(--gradient-primary);
+  .hero-emoji { font-size: 5rem; }
+}
+
+.hero-card-float {
+  position: absolute;
+  bottom: 24px;
+  left: -20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  animation: float 4s ease-in-out infinite;
+  .hero-emoji { font-size: 1.8rem; }
+  strong { display: block; font-size: 0.85rem; }
+  small { color: var(--ink-500); font-size: 0.78rem; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; padding-top: 48px; }
+  .hero-visual { height: 320px; margin-top: 24px; }
+  .hero-card-main { width: 220px; height: 240px; .hero-emoji { font-size: 3.5rem; } }
+}

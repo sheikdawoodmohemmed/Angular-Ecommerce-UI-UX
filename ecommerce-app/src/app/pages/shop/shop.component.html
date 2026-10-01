@@ -1,0 +1,70 @@
+<section class="shop-header">
+  <div class="container">
+    <span class="eyebrow">All Products</span>
+    <h1>Shop the Collection</h1>
+    <p>{{ results().length }} products found</p>
+  </div>
+</section>
+
+<section class="section shop-body">
+  <div class="container shop-layout">
+    <aside class="filters card">
+      <h3>Category</h3>
+      <div class="filter-list">
+        @for (c of categories; track c) {
+          <button
+            class="filter-chip"
+            [class.active]="selectedCategory() === c"
+            (click)="setCategory(c)"
+          >{{ c }}</button>
+        }
+      </div>
+
+      <h3>Max Price: ${{ maxPrice() }}</h3>
+      <input
+        type="range"
+        min="20"
+        max="250"
+        step="5"
+        [value]="maxPrice()"
+        (input)="maxPrice.set(+$any($event.target).value)"
+        class="price-slider"
+      />
+
+      <h3>Search</h3>
+      <input
+        type="text"
+        placeholder="Search products..."
+        [ngModel]="searchTerm()"
+        (ngModelChange)="searchTerm.set($event)"
+        class="search-input"
+      />
+    </aside>
+
+    <div class="results-panel">
+      <div class="results-toolbar">
+        <span>{{ results().length }} results</span>
+        <select [ngModel]="sort()" (ngModelChange)="sort.set($event)">
+          <option value="featured">Sort: Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Highest Rated</option>
+        </select>
+      </div>
+
+      @if (results().length > 0) {
+        <div class="product-grid">
+          @for (p of results(); track p.id) {
+            <app-product-card [product]="p" (addToCart)="onAdd($event)"></app-product-card>
+          }
+        </div>
+      } @else {
+        <div class="empty-state">
+          <span>🔍</span>
+          <h3>No products match your filters</h3>
+          <p>Try adjusting the category, price or search term.</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

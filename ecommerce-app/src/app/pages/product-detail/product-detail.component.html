@@ -1,0 +1,127 @@
+@if (product) {
+  <section class="section">
+    <div class="container">
+      <div class="breadcrumb">
+        <a routerLink="/">Home</a> / <a routerLink="/shop">Shop</a> / <span>{{ product.name }}</span>
+      </div>
+
+      <div class="detail-layout">
+        <div class="gallery">
+          <div class="main-image">
+            <span class="emoji">{{ product.image }}</span>
+            @if (product.badge === 'sale') { <span class="badge badge-sale corner">Sale</span> }
+          </div>
+          <div class="thumbs">
+            @for (i of [1,2,3,4]; track i) {
+              <div class="thumb" [class.active]="i === 1"><span>{{ product.image }}</span></div>
+            }
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <span class="category">{{ product.category }}</span>
+          <h1>{{ product.name }}</h1>
+
+          <div class="rating">
+            @for (s of stars(); track s) {
+              <svg width="15" height="15" viewBox="0 0 24 24" [attr.fill]="s <= product.rating ? '#fbbf24' : '#e7e2ee'">
+                <path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/>
+              </svg>
+            }
+            <span>{{ product.rating }} ({{ product.reviews }} reviews)</span>
+          </div>
+
+          <div class="price-row">
+            <span class="price">${{ product.price.toFixed(2) }}</span>
+            @if (product.oldPrice) {
+              <span class="old-price">${{ product.oldPrice.toFixed(2) }}</span>
+              <span class="badge badge-sale">Save {{ ((1 - product.price / product.oldPrice) * 100) | number:'1.0-0' }}%</span>
+            }
+          </div>
+
+          <p class="desc">{{ product.description }}</p>
+
+          @if (product.colors) {
+            <div class="option-group">
+              <label>Color</label>
+              <div class="color-swatches">
+                @for (c of product.colors; track $index) {
+                  <button
+                    class="swatch"
+                    [class.active]="selectedColor() === $index"
+                    [style.background]="c"
+                    (click)="selectedColor.set($index)"
+                  ></button>
+                }
+              </div>
+            </div>
+          }
+
+          <div class="option-group">
+            <label>Quantity</label>
+            <div class="qty-stepper">
+              <button (click)="changeQty(-1)">−</button>
+              <span>{{ quantity() }}</span>
+              <button (click)="changeQty(1)">+</button>
+            </div>
+            <span class="stock">{{ product.stock }} in stock</span>
+          </div>
+
+          <div class="action-row">
+            <button class="btn btn-primary btn-block" [class.added]="justAdded()" (click)="addToCart()">
+              @if (justAdded()) { Added to Cart ✓ } @else { Add to Cart — ${{ (product.price * quantity()).toFixed(2) }} }
+            </button>
+          </div>
+
+          <div class="perks">
+            <span>🚚 Free shipping over $75</span>
+            <span>↩️ 30-day easy returns</span>
+            <span>🔒 Secure checkout</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn" [class.active]="activeTab() === 'description'" (click)="activeTab.set('description')">Description</button>
+        <button class="tab-btn" [class.active]="activeTab() === 'reviews'" (click)="activeTab.set('reviews')">Reviews ({{ product.reviews }})</button>
+      </div>
+      <div class="tab-content card">
+        @if (activeTab() === 'description') {
+          <p>{{ product.description }}</p>
+          <ul>
+            <li>Premium materials sourced responsibly</li>
+            <li>Designed for everyday comfort and durability</li>
+            <li>Ships in recyclable, plastic-free packaging</li>
+          </ul>
+        } @else {
+          <div class="review-item">
+            <strong>Jordan M.</strong>
+            <div class="stars">★★★★★</div>
+            <p>Exceeded expectations — the fit and finish feel premium for the price.</p>
+          </div>
+          <div class="review-item">
+            <strong>Casey L.</strong>
+            <div class="stars">★★★★☆</div>
+            <p>Great quality overall, delivery took a couple extra days.</p>
+          </div>
+        }
+      </div>
+
+      @if (related.length) {
+        <div class="section-head" style="margin-top:56px">
+          <h2>You may also like</h2>
+        </div>
+        <div class="product-grid">
+          @for (p of related; track p.id) {
+            <app-product-card [product]="p" (addToCart)="onRelatedAdd($event)"></app-product-card>
+          }
+        </div>
+      }
+    </div>
+  </section>
+} @else {
+  <div class="container not-found">
+    <h2>Product not found</h2>
+    <a routerLink="/shop" class="btn btn-primary">Back to Shop</a>
+  </div>
+}

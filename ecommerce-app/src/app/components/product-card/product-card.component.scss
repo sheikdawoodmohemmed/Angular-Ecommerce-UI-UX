@@ -1,0 +1,84 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+}
+.product-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.thumb {
+  position: relative;
+  height: 190px;
+  background: var(--gradient-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .emoji { font-size: 4rem; }
+}
+
+.corner { position: absolute; top: 12px; left: 12px; }
+
+.wishlist-btn {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-500);
+  transition: color 0.2s, transform 0.2s;
+}
+.wishlist-btn.active { color: var(--accent-pink); transform: scale(1.1); }
+
+.info {
+  padding: 16px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.category { font-size: 0.72rem; color: var(--purple-600); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-900);
+  margin: 2px 0 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.4em;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  small { color: var(--ink-500); margin-left: 6px; font-size: 0.75rem; }
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 4px;
+}
+.price { font-weight: 700; font-size: 1.05rem; color: var(--ink-900); }
+.old-price { font-size: 0.82rem; color: var(--ink-500); text-decoration: line-through; }
+
+.add-btn {
+  margin: 10px 16px 16px;
+  padding: 10px;
+  border-radius: 999px;
+  border: 1.5px solid var(--purple-300);
+  background: transparent;
+  color: var(--purple-700);
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.2s, color 0.2s;
+}
+.add-btn:hover { background: var(--purple-600); color: #fff; border-color: var(--purple-600); }
+.add-btn.added { background: #16a34a; color: #fff; border-color: #16a34a; }

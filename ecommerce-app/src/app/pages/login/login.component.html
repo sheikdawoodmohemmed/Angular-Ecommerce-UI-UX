@@ -1,0 +1,48 @@
+<section class="auth-section">
+  <div class="auth-card card">
+    <div class="auth-tabs">
+      <button class="tab" [class.active]="mode() === 'login'" (click)="mode.set('login')">Sign In</button>
+      <button class="tab" [class.active]="mode() === 'register'" (click)="mode.set('register')">Create Account</button>
+    </div>
+
+    @if (submitted()) {
+      <div class="success-box">
+        <span>✓</span>
+        <p>{{ mode() === 'login' ? "You're signed in!" : 'Account created successfully!' }}</p>
+        <a routerLink="/shop" class="btn btn-primary btn-block">Continue Shopping</a>
+      </div>
+    } @else {
+      <form (submit)="$event.preventDefault(); submit()">
+        @if (mode() === 'register') {
+          <div class="field">
+            <label>Full Name</label>
+            <input type="text" placeholder="Jane Doe" />
+          </div>
+        }
+        <div class="field">
+          <label>Email</label>
+          <input type="email" placeholder="jane@example.com" [ngModel]="email()" (ngModelChange)="email.set($event)" name="email" />
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" placeholder="••••••••" [ngModel]="password()" (ngModelChange)="password.set($event)" name="password" />
+        </div>
+        @if (mode() === 'login') {
+          <div class="form-helpers">
+            <label class="remember"><input type="checkbox" /> Remember me</label>
+            <a href="#">Forgot password?</a>
+          </div>
+        }
+        <button type="submit" class="btn btn-primary btn-block">
+          {{ mode() === 'login' ? 'Sign In' : 'Create Account' }}
+        </button>
+      </form>
+
+      <div class="divider"><span>or continue with</span></div>
+      <div class="social-row">
+        <button class="btn btn-ghost">Google</button>
+        <button class="btn btn-ghost">Apple</button>
+      </div>
+    }
+  </div>
+</section>

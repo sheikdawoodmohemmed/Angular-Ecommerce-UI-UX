@@ -1,0 +1,41 @@
+<header class="navbar">
+  <div class="navbar-inner container">
+    <a routerLink="/" class="brand">
+      <span class="brand-mark">P</span>
+      <span class="brand-name">Purple<em>Cart</em></span>
+    </a>
+
+    <nav class="nav-links" [class.open]="mobileOpen()">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="mobileOpen.set(false)">Home</a>
+      <a routerLink="/shop" routerLinkActive="active" (click)="mobileOpen.set(false)">Shop</a>
+      <a href="#categories" (click)="mobileOpen.set(false)">Categories</a>
+      <a href="#about" (click)="mobileOpen.set(false)">About</a>
+      <a routerLink="/login" class="mobile-only" (click)="mobileOpen.set(false)">Login</a>
+    </nav>
+
+    <div class="navbar-actions">
+      <button class="icon-btn" (click)="toggleSearch()" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <a routerLink="/login" class="icon-btn desktop-only" aria-label="Account">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+      <a routerLink="/cart" class="icon-btn cart-btn" aria-label="Cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21.6 8H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="21" r="1.3" fill="currentColor"/><circle cx="18" cy="21" r="1.3" fill="currentColor"/></svg>
+        @if (cart.count() > 0) {
+          <span class="cart-count">{{ cart.count() }}</span>
+        }
+      </a>
+      <button class="icon-btn hamburger" (click)="toggleMobile()" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  @if (searchOpen()) {
+    <div class="search-drawer container">
+      <input type="text" placeholder="Search for products, brands and more..." autofocus />
+      <button class="btn btn-primary btn-sm" (click)="toggleSearch()">Search</button>
+    </div>
+  }
+</header>
